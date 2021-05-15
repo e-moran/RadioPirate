@@ -1,13 +1,11 @@
 package com.eointm.radiopirate.job;
 
-import java.io.IOException;
-
 import com.eointm.radiopirate.job.ffmpeg.provider.FFmpegProviderModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-
+import java.io.IOException;
 import net.bramp.ffmpeg.FFmpeg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +30,7 @@ public class RadioPirateCoreRunner {
 
   public void start() {
     try {
-      if(!ffmpeg.isFFmpeg()) {
+      if (!ffmpeg.isFFmpeg()) {
         throw new IOException("File wasn't working ffmpeg binary");
       }
     } catch (IOException e) {

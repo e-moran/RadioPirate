@@ -54,9 +54,9 @@ public class FFmpegDownloaderTest {
 
     if (!Objects.isNull(tempFolder.listFiles())) {
       boolean deletedAllInTemp = Arrays
-          .stream(tempFolder.listFiles())
-          .map(File::delete)
-          .allMatch(Predicate.isEqual(true));
+        .stream(tempFolder.listFiles())
+        .map(File::delete)
+        .allMatch(Predicate.isEqual(true));
       if (deletedAllInTemp) {
         if (tempFolder.delete()) {
           LOG.info("Cleaned up temp successfully");
@@ -67,11 +67,11 @@ public class FFmpegDownloaderTest {
     File binFolder = new File(FFmpegProvider.BIN_FOLDER_PATH);
     LOG.info(binFolder.getAbsolutePath());
 
-    if(!Objects.isNull(tempFolder.listFiles())) {
+    if (!Objects.isNull(tempFolder.listFiles())) {
       boolean deletedAllInBin = Arrays
-          .stream(binFolder.listFiles())
-          .map(File::delete)
-          .allMatch(Predicate.isEqual(true));
+        .stream(binFolder.listFiles())
+        .map(File::delete)
+        .allMatch(Predicate.isEqual(true));
       if (deletedAllInBin) {
         if (binFolder.delete()) {
           LOG.info("Cleaned up bin successfully");

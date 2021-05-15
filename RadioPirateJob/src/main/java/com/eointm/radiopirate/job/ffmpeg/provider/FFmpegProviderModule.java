@@ -1,7 +1,6 @@
 package com.eointm.radiopirate.job.ffmpeg.provider;
 
 import com.google.inject.AbstractModule;
-
 import net.bramp.ffmpeg.FFmpeg;
 
 public class FFmpegProviderModule extends AbstractModule {

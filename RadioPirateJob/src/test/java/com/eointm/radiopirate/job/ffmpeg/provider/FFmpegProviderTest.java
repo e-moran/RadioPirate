@@ -7,19 +7,26 @@ import static org.mockito.Mockito.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
-
+import net.bramp.ffmpeg.FFmpeg;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import net.bramp.ffmpeg.FFmpeg;
-
 @ExtendWith(MockitoExtension.class)
 public class FFmpegProviderTest {
-  private static final String EXPECTED_FILE_PATH_OTHER = String.format("%s/%s", FFmpegProvider.BIN_FOLDER_PATH, FFmpegProvider.FILE_NAME_OTHER);
-  private static final String EXPECTED_FILE_PATH_WINDOWS = String.format("%s/%s", FFmpegProvider.BIN_FOLDER_PATH, FFmpegProvider.FILE_NAME_WINDOWS);
+
+  private static final String EXPECTED_FILE_PATH_OTHER = String.format(
+    "%s/%s",
+    FFmpegProvider.BIN_FOLDER_PATH,
+    FFmpegProvider.FILE_NAME_OTHER
+  );
+  private static final String EXPECTED_FILE_PATH_WINDOWS = String.format(
+    "%s/%s",
+    FFmpegProvider.BIN_FOLDER_PATH,
+    FFmpegProvider.FILE_NAME_WINDOWS
+  );
 
   @Mock
   private FFmpeg ffmpegMock;
@@ -34,23 +41,28 @@ public class FFmpegProviderTest {
 
   @BeforeEach
   public void setup() {
-    ffmpegProviderMock = mock(FFmpegProvider.class, withSettings().useConstructor(ffmpegDownloaderMock));
+    ffmpegProviderMock =
+      mock(FFmpegProvider.class, withSettings().useConstructor(ffmpegDownloaderMock));
   }
 
   @Test
   public void itProvidesTheCorrectExpectedFFmpegLocationOnMacAndLinux() {
-    when(ffmpegProviderMock.getFileName()).thenReturn(Optional.of(FFmpegProvider.FILE_NAME_OTHER));
+    when(ffmpegProviderMock.getFileName())
+      .thenReturn(Optional.of(FFmpegProvider.FILE_NAME_OTHER));
     when(ffmpegProviderMock.getExpectedFFmpegLocation()).thenCallRealMethod();
 
-    assertThat(ffmpegProviderMock.getExpectedFFmpegLocation()).isEqualTo(EXPECTED_FILE_PATH_OTHER);
+    assertThat(ffmpegProviderMock.getExpectedFFmpegLocation())
+      .isEqualTo(EXPECTED_FILE_PATH_OTHER);
   }
 
   @Test
   public void itProvidesTheCorrectExpectedFFmpegLocationOnWindows() {
-    when(ffmpegProviderMock.getFileName()).thenReturn(Optional.of(FFmpegProvider.FILE_NAME_WINDOWS));
+    when(ffmpegProviderMock.getFileName())
+      .thenReturn(Optional.of(FFmpegProvider.FILE_NAME_WINDOWS));
     when(ffmpegProviderMock.getExpectedFFmpegLocation()).thenCallRealMethod();
 
-    assertThat(ffmpegProviderMock.getExpectedFFmpegLocation()).isEqualTo(EXPECTED_FILE_PATH_WINDOWS);
+    assertThat(ffmpegProviderMock.getExpectedFFmpegLocation())
+      .isEqualTo(EXPECTED_FILE_PATH_WINDOWS);
   }
 
   @Test
@@ -58,7 +70,8 @@ public class FFmpegProviderTest {
     when(ffmpegProviderMock.asFile(anyString())).thenReturn(fileMock);
     when(ffmpegProviderMock.asFFmpeg(anyString())).thenReturn(ffmpegMock);
     when(ffmpegProviderMock.get()).thenCallRealMethod();
-    when(ffmpegProviderMock.getExpectedFFmpegLocation()).thenReturn(EXPECTED_FILE_PATH_WINDOWS);
+    when(ffmpegProviderMock.getExpectedFFmpegLocation())
+      .thenReturn(EXPECTED_FILE_PATH_WINDOWS);
     when(fileMock.exists()).thenReturn(false);
 
     ffmpegProviderMock.get();
